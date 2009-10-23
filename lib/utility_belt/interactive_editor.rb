@@ -4,6 +4,7 @@ class InteractiveEditor
   DEBIAN_SENSIBLE_EDITOR = "/usr/bin/sensible-editor"
   MACOSX_OPEN_CMD        = "open"
   XDG_OPEN               = "/usr/bin/xdg-open"
+  VIM                    = "vim +'set filetype=ruby'"
 
   def self.sensible_editor
     return ENV["VISUAL"] if ENV["VISUAL"]
@@ -21,7 +22,7 @@ class InteractiveEditor
   end
 
   attr_accessor :editor
-  def initialize(editor = :vim)
+  def initialize(editor = VIM)
     @editor = editor.to_s
     if @editor == "mate"
       @editor = "mate -w"
@@ -58,8 +59,10 @@ module InteractiveEditing
   end
 
   def vi
-    handling_jruby_bug {edit_interactively(:vim)}
+    handling_jruby_bug {edit_interactively(InteractiveEditor::VIM)}
   end
+
+  alias_method :vim, :vi
 
   def mate
     edit_interactively(:mate)
