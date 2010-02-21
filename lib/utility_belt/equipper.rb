@@ -17,6 +17,7 @@ module UtilityBelt
     DEFAULTS = %w{wirble
                   hash_math
                   interactive_editor
+                  inspectinator
                   irb_options
                   irb_verbosity_control}
 
